@@ -1,8 +1,16 @@
 $(document).ready(function() {/*DNT*/
 
+/**HANDLEBARS VERSION**/
 for (var i = 0; i < 36; i++) {
-  $('#game').append('<div class="box"><p></p></div>');
+  var gridbox = Handlebars.compile('<div class="box"><p></p></div>');
+  $('#game').append(gridbox);
 }
+
+/*BASIC VERSION*/
+// for (var i = 0; i < 36; i++) {
+//   $('#game').append('<div class="box"><p></p></div>');
+// }
+//
 
 $('.box').click(function() {
   boxIndex = $(this).index();
@@ -12,8 +20,7 @@ $('.box').click(function() {
     'method': 'get',
     'success': function(data) {
       var randomNr = data.response;
-      console.log('random nr: ' + randomNr);
-      $('.box').eq(boxIndex).children('p').text(randomNr);
+      $('.box').eq(boxIndex).children('p').append(randomNr);
       if (randomNr <= 5) {
         $('.box').eq(boxIndex).addClass('yellow');
       } else {
@@ -25,8 +32,5 @@ $('.box').click(function() {
     }
   })
 })
-
-/**/
-
 
 })/*DNT - closing doc.ready*/
